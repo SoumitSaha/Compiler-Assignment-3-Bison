@@ -122,33 +122,33 @@ return a  ;
 
 
 
-int func()
+int func(int a)
 {
 return a  ;
 }
- 
+
 
 
 Line 3 : unit : func_definition
 
 
 
-int func()
+int func(int a)
 {
 return a  ;
 }
- 
+
 
 
 Line 3 : program : unit
 
 
 
-int func()
+int func(int a)
 {
 return a  ;
 }
- 
+
 
 
 Line 5 : type_specifier : INT
@@ -264,33 +264,124 @@ float c ;
 
 
 
-Line 7 : type_specifier : FLOAT
+Line 7 : factor : CONST_FLOAT
 
 
 
-float 
+2.5 
 
 
-Line 7 : declaration_list : ID
-
-
-
-d 
-
-
-Line 7 : var_declaration : type_specifier declaration_list SEMICOLON
+Line 7 : unary_expression : factor
 
 
 
-float d ;
+2.5 
+
+
+Line 7 : term : unary_expression
 
 
 
-Line 7 : statement : var_declaration
+2.5 
+
+
+Line 7 : simple_expression : term
 
 
 
-float d ;
+2.5 
+
+
+Line 7 : rel_expression : simple_expression
+
+
+
+2.5 
+
+
+Line 7 : logic_expression : rel_expression
+
+
+
+2.5 
+
+
+Line 7 : expression : logic_expression
+
+
+
+2.5 
+
+
+Line 7 : variable : ID LTHIRD expression RTHIRD
+
+
+
+a[2.5 ] 
+
+
+Line 7 : factor : CONST_INT
+
+
+
+1 
+
+
+Line 7 : unary_expression : factor
+
+
+
+1 
+
+
+Line 7 : term : unary_expression
+
+
+
+1 
+
+
+Line 7 : simple_expression : term
+
+
+
+1 
+
+
+Line 7 : rel_expression : simple_expression
+
+
+
+1 
+
+
+Line 7 : logic_expression : rel_expression
+
+
+
+1 
+
+
+Line 7 : expression : variable ASSIGNOP logic_expression
+
+
+
+a[2.5 ] =1 
+
+
+Line 7 : expression_statement : expression SEMICOLON
+
+
+
+a[2.5 ] =1 ;
+
+
+
+Line 7 : statement : expression_statement
+
+
+
+a[2.5 ] =1 ;
 
 
 
@@ -300,120 +391,71 @@ Line 7 : statements : statements statement
 
 int a[2] ,c,i,j;
 float c ;
-float d ;
+a[2.5 ] =1 ;
 
+
+
+Line 8 : variable : ID
+
+
+
+i 
 
 
 Line 8 : factor : CONST_FLOAT
 
 
 
-2.5 
+2.3 
 
 
 Line 8 : unary_expression : factor
 
 
 
-2.5 
+2.3 
 
 
 Line 8 : term : unary_expression
 
 
 
-2.5 
+2.3 
 
 
 Line 8 : simple_expression : term
 
 
 
-2.5 
+2.3 
 
 
 Line 8 : rel_expression : simple_expression
 
 
 
-2.5 
+2.3 
 
 
 Line 8 : logic_expression : rel_expression
 
 
 
-2.5 
-
-
-Line 8 : expression : logic_expression
-
-
-
-2.5 
-
-
-Line 8 : variable : ID LTHIRD expression RTHIRD
-
-
-
-a[2.5 ] 
-
-
-Line 8 : factor : CONST_INT
-
-
-
-1 
-
-
-Line 8 : unary_expression : factor
-
-
-
-1 
-
-
-Line 8 : term : unary_expression
-
-
-
-1 
-
-
-Line 8 : simple_expression : term
-
-
-
-1 
-
-
-Line 8 : rel_expression : simple_expression
-
-
-
-1 
-
-
-Line 8 : logic_expression : rel_expression
-
-
-
-1 
+2.3 
 
 
 Line 8 : expression : variable ASSIGNOP logic_expression
 
 
 
-a[2.5 ] =1 
+i =2.3 
 
 
 Line 8 : expression_statement : expression SEMICOLON
 
 
 
-a[2.5 ] =1 ;
+i =2.3 ;
 
 
 
@@ -421,7 +463,7 @@ Line 8 : statement : expression_statement
 
 
 
-a[2.5 ] =1 ;
+i =2.3 ;
 
 
 
@@ -431,8 +473,8 @@ Line 8 : statements : statements statement
 
 int a[2] ,c,i,j;
 float c ;
-float d ;
 a[2.5 ] =1 ;
+i =2.3 ;
 
 
 
@@ -440,63 +482,84 @@ Line 9 : variable : ID
 
 
 
-i 
+j 
 
 
-Line 9 : factor : CONST_FLOAT
+Line 9 : factor : CONST_INT
 
 
 
-2.3 
+2 
 
 
 Line 9 : unary_expression : factor
 
 
 
-2.3 
+2 
 
 
 Line 9 : term : unary_expression
 
 
 
-2.3 
+2 
+
+
+Line 9 : factor : CONST_FLOAT
+
+
+
+3.7 
+
+
+Line 9 : unary_expression : factor
+
+
+
+3.7 
+
+
+Line 9 : term : term MULOP unary_expression
+
+
+
+2 %3.7 
 
 
 Line 9 : simple_expression : term
 
 
 
-2.3 
+2 %3.7 
 
 
 Line 9 : rel_expression : simple_expression
 
 
 
-2.3 
+2 %3.7 
 
 
 Line 9 : logic_expression : rel_expression
 
 
 
-2.3 
+2 %3.7 
 
 
 Line 9 : expression : variable ASSIGNOP logic_expression
 
 
 
-i =2.3 
+j =2 %3.7 
 
 
 Line 9 : expression_statement : expression SEMICOLON
 
 
 
-i =2.3 ;
+j =2 %3.7 ;
 
 
 
@@ -504,7 +567,7 @@ Line 9 : statement : expression_statement
 
 
 
-i =2.3 ;
+j =2 %3.7 ;
 
 
 
@@ -514,9 +577,9 @@ Line 9 : statements : statements statement
 
 int a[2] ,c,i,j;
 float c ;
-float d ;
 a[2.5 ] =1 ;
 i =2.3 ;
+j =2 %3.7 ;
 
 
 
@@ -524,84 +587,63 @@ Line 10 : variable : ID
 
 
 
-j 
+a 
 
 
 Line 10 : factor : CONST_INT
 
 
 
-2 
+4 
 
 
 Line 10 : unary_expression : factor
 
 
 
-2 
+4 
 
 
 Line 10 : term : unary_expression
 
 
 
-2 
-
-
-Line 10 : factor : CONST_FLOAT
-
-
-
-3.7 
-
-
-Line 10 : unary_expression : factor
-
-
-
-3.7 
-
-
-Line 10 : term : term MULOP unary_expression
-
-
-
-2 %3.7 
+4 
 
 
 Line 10 : simple_expression : term
 
 
 
-2 %3.7 
+4 
 
 
 Line 10 : rel_expression : simple_expression
 
 
 
-2 %3.7 
+4 
 
 
 Line 10 : logic_expression : rel_expression
 
 
 
-2 %3.7 
+4 
 
 
 Line 10 : expression : variable ASSIGNOP logic_expression
 
 
 
-j =2 %3.7 
+a =4 
 
 
 Line 10 : expression_statement : expression SEMICOLON
 
 
 
-j =2 %3.7 ;
+a =4 ;
 
 
 
@@ -609,7 +651,7 @@ Line 10 : statement : expression_statement
 
 
 
-j =2 %3.7 ;
+a =4 ;
 
 
 
@@ -619,10 +661,10 @@ Line 10 : statements : statements statement
 
 int a[2] ,c,i,j;
 float c ;
-float d ;
 a[2.5 ] =1 ;
 i =2.3 ;
 j =2 %3.7 ;
+a =4 ;
 
 
 
@@ -633,60 +675,116 @@ Line 11 : variable : ID
 a 
 
 
-Line 11 : factor : CONST_INT
+Line 11 : factor : variable
 
 
 
-4 
+a 
 
 
 Line 11 : unary_expression : factor
 
 
 
-4 
+a 
 
 
 Line 11 : term : unary_expression
 
 
 
-4 
+a 
 
 
 Line 11 : simple_expression : term
 
 
 
-4 
+a 
 
 
 Line 11 : rel_expression : simple_expression
 
 
 
-4 
+a 
 
 
 Line 11 : logic_expression : rel_expression
 
 
 
-4 
+a 
 
 
-Line 11 : expression : variable ASSIGNOP logic_expression
+Line 11 : arguments : logic_expression
 
 
 
-a =4 
+a 
+
+
+Line 11 : argument_list : arguments
+
+
+
+a 
+
+
+Line 11 : factor : ID LPAREN argument_list RPAREN
+
+
+
+func()
+
+
+Line 11 : unary_expression : factor
+
+
+
+func()
+
+
+Line 11 : term : unary_expression
+
+
+
+func()
+
+
+Line 11 : simple_expression : term
+
+
+
+func()
+
+
+Line 11 : rel_expression : simple_expression
+
+
+
+func()
+
+
+Line 11 : logic_expression : rel_expression
+
+
+
+func()
+
+
+Line 11 : expression : logic_expression
+
+
+
+func()
 
 
 Line 11 : expression_statement : expression SEMICOLON
 
 
 
-a =4 ;
+func();
 
 
 
@@ -694,7 +792,7 @@ Line 11 : statement : expression_statement
 
 
 
-a =4 ;
+func();
 
 
 
@@ -704,11 +802,11 @@ Line 11 : statements : statements statement
 
 int a[2] ,c,i,j;
 float c ;
-float d ;
 a[2.5 ] =1 ;
 i =2.3 ;
 j =2 %3.7 ;
 a =4 ;
+func();
 
 
 
@@ -716,63 +814,63 @@ Line 12 : variable : ID
 
 
 
-d 
+b 
 
 
-Line 12 : factor : CONST_FLOAT
+Line 12 : factor : CONST_INT
 
 
 
-2.5 
+8 
 
 
 Line 12 : unary_expression : factor
 
 
 
-2.5 
+8 
 
 
 Line 12 : term : unary_expression
 
 
 
-2.5 
+8 
 
 
 Line 12 : simple_expression : term
 
 
 
-2.5 
+8 
 
 
 Line 12 : rel_expression : simple_expression
 
 
 
-2.5 
+8 
 
 
 Line 12 : logic_expression : rel_expression
 
 
 
-2.5 
+8 
 
 
 Line 12 : expression : variable ASSIGNOP logic_expression
 
 
 
-d =2.5 
+b =8 
 
 
 Line 12 : expression_statement : expression SEMICOLON
 
 
 
-d =2.5 ;
+b =8 ;
 
 
 
@@ -780,7 +878,7 @@ Line 12 : statement : expression_statement
 
 
 
-d =2.5 ;
+b =8 ;
 
 
 
@@ -790,84 +888,69 @@ Line 12 : statements : statements statement
 
 int a[2] ,c,i,j;
 float c ;
-float d ;
 a[2.5 ] =1 ;
 i =2.3 ;
 j =2 %3.7 ;
 a =4 ;
-d =2.5 ;
+func();
+b =8 ;
 
-
-
-Line 13 : variable : ID
-
-
-
-d 
 
 
 Line 13 : factor : CONST_INT
 
 
 
-2 
+0 
 
 
 Line 13 : unary_expression : factor
 
 
 
-2 
+0 
 
 
 Line 13 : term : unary_expression
 
 
 
-2 
+0 
 
 
 Line 13 : simple_expression : term
 
 
 
-2 
+0 
 
 
 Line 13 : rel_expression : simple_expression
 
 
 
-2 
+0 
 
 
 Line 13 : logic_expression : rel_expression
 
 
 
-2 
+0 
 
 
-Line 13 : expression : variable ASSIGNOP logic_expression
-
-
-
-d =2 
-
-
-Line 13 : expression_statement : expression SEMICOLON
+Line 13 : expression : logic_expression
 
 
 
-d =2 ;
+0 
+
+
+Line 13 : statement : RETURN expression SEMICOLON
 
 
 
-Line 13 : statement : expression_statement
-
-
-
-d =2 ;
+return 0  ;
 
 
 
@@ -877,413 +960,10 @@ Line 13 : statements : statements statement
 
 int a[2] ,c,i,j;
 float c ;
-float d ;
 a[2.5 ] =1 ;
 i =2.3 ;
 j =2 %3.7 ;
 a =4 ;
-d =2.5 ;
-d =2 ;
-
-
-
-Line 14 : variable : ID
-
-
-
-a 
-
-
-Line 14 : factor : CONST_FLOAT
-
-
-
-4.5 
-
-
-Line 14 : unary_expression : factor
-
-
-
-4.5 
-
-
-Line 14 : term : unary_expression
-
-
-
-4.5 
-
-
-Line 14 : simple_expression : term
-
-
-
-4.5 
-
-
-Line 14 : rel_expression : simple_expression
-
-
-
-4.5 
-
-
-Line 14 : logic_expression : rel_expression
-
-
-
-4.5 
-
-
-Line 14 : expression : variable ASSIGNOP logic_expression
-
-
-
-a =4.5 
-
-
-Line 14 : expression_statement : expression SEMICOLON
-
-
-
-a =4.5 ;
-
-
-
-Line 14 : statement : expression_statement
-
-
-
-a =4.5 ;
-
-
-
-Line 14 : statements : statements statement
-
-
-
-int a[2] ,c,i,j;
-float c ;
-float d ;
-a[2.5 ] =1 ;
-i =2.3 ;
-j =2 %3.7 ;
-a =4 ;
-d =2.5 ;
-d =2 ;
-a =4.5 ;
-
-
-
-Line 15 : variable : ID
-
-
-
-a 
-
-
-Line 15 : factor : variable
-
-
-
-a 
-
-
-Line 15 : unary_expression : factor
-
-
-
-a 
-
-
-Line 15 : term : unary_expression
-
-
-
-a 
-
-
-Line 15 : simple_expression : term
-
-
-
-a 
-
-
-Line 15 : rel_expression : simple_expression
-
-
-
-a 
-
-
-Line 15 : logic_expression : rel_expression
-
-
-
-a 
-
-
-Line 15 : arguments : logic_expression
-
-
-
-a 
-
-
-Line 15 : argument_list : arguments
-
-
-
-a 
-
-
-Line 15 : factor : ID LPAREN argument_list RPAREN
-
-
-
-func()
-
-
-Line 15 : unary_expression : factor
-
-
-
-func()
-
-
-Line 15 : term : unary_expression
-
-
-
-func()
-
-
-Line 15 : simple_expression : term
-
-
-
-func()
-
-
-Line 15 : rel_expression : simple_expression
-
-
-
-func()
-
-
-Line 15 : logic_expression : rel_expression
-
-
-
-func()
-
-
-Line 15 : expression : logic_expression
-
-
-
-func()
-
-
-Line 15 : expression_statement : expression SEMICOLON
-
-
-
-func();
-
-
-
-Line 15 : statement : expression_statement
-
-
-
-func();
-
-
-
-Line 15 : statements : statements statement
-
-
-
-int a[2] ,c,i,j;
-float c ;
-float d ;
-a[2.5 ] =1 ;
-i =2.3 ;
-j =2 %3.7 ;
-a =4 ;
-d =2.5 ;
-d =2 ;
-a =4.5 ;
-func();
-
-
-
-Line 16 : variable : ID
-
-
-
-b 
-
-
-Line 16 : factor : CONST_INT
-
-
-
-8 
-
-
-Line 16 : unary_expression : factor
-
-
-
-8 
-
-
-Line 16 : term : unary_expression
-
-
-
-8 
-
-
-Line 16 : simple_expression : term
-
-
-
-8 
-
-
-Line 16 : rel_expression : simple_expression
-
-
-
-8 
-
-
-Line 16 : logic_expression : rel_expression
-
-
-
-8 
-
-
-Line 16 : expression : variable ASSIGNOP logic_expression
-
-
-
-b =8 
-
-
-Line 16 : expression_statement : expression SEMICOLON
-
-
-
-b =8 ;
-
-
-
-Line 16 : statement : expression_statement
-
-
-
-b =8 ;
-
-
-
-Line 16 : statements : statements statement
-
-
-
-int a[2] ,c,i,j;
-float c ;
-float d ;
-a[2.5 ] =1 ;
-i =2.3 ;
-j =2 %3.7 ;
-a =4 ;
-d =2.5 ;
-d =2 ;
-a =4.5 ;
-func();
-b =8 ;
-
-
-
-Line 17 : factor : CONST_INT
-
-
-
-0 
-
-
-Line 17 : unary_expression : factor
-
-
-
-0 
-
-
-Line 17 : term : unary_expression
-
-
-
-0 
-
-
-Line 17 : simple_expression : term
-
-
-
-0 
-
-
-Line 17 : rel_expression : simple_expression
-
-
-
-0 
-
-
-Line 17 : logic_expression : rel_expression
-
-
-
-0 
-
-
-Line 17 : expression : logic_expression
-
-
-
-0 
-
-
-Line 17 : statement : RETURN expression SEMICOLON
-
-
-
-return 0  ;
-
-
-
-Line 17 : statements : statements statement
-
-
-
-int a[2] ,c,i,j;
-float c ;
-float d ;
-a[2.5 ] =1 ;
-i =2.3 ;
-j =2 %3.7 ;
-a =4 ;
-d =2.5 ;
-d =2 ;
-a =4.5 ;
 func();
 b =8 ;
 return 0  ;
@@ -1296,9 +976,6 @@ return 0  ;
 
 
 6--> < ID, c > 
-
-
-7--> < ID, d > 
 
 
 12--> < ID, i > 
@@ -1325,14 +1002,10 @@ return 0  ;
 {
 int a[2] ,c,i,j;
 float c ;
-float d ;
 a[2.5 ] =1 ;
 i =2.3 ;
 j =2 %3.7 ;
 a =4 ;
-d =2.5 ;
-d =2 ;
-a =4.5 ;
 func();
 b =8 ;
 return 0  ;
@@ -1346,22 +1019,18 @@ int main()
 {
 int a[2] ,c,i,j;
 float c ;
-float d ;
 a[2.5 ] =1 ;
 i =2.3 ;
 j =2 %3.7 ;
 a =4 ;
-d =2.5 ;
-d =2 ;
-a =4.5 ;
 func();
 b =8 ;
 return 0  ;
 }
- 
 
 
-Line 18 : unit : func_definition
+
+Line 14 : unit : func_definition
 
 
 
@@ -1369,46 +1038,38 @@ int main()
 {
 int a[2] ,c,i,j;
 float c ;
-float d ;
 a[2.5 ] =1 ;
 i =2.3 ;
 j =2 %3.7 ;
 a =4 ;
-d =2.5 ;
-d =2 ;
-a =4.5 ;
 func();
 b =8 ;
 return 0  ;
 }
- 
-
-
-Line 18 : program : program unit
 
 
 
-int func()
+Line 14 : program : program unit
+
+
+
+int func(int a)
 {
 return a  ;
 }
-  int main()
+ int main()
 {
 int a[2] ,c,i,j;
 float c ;
-float d ;
 a[2.5 ] =1 ;
 i =2.3 ;
 j =2 %3.7 ;
 a =4 ;
-d =2.5 ;
-d =2 ;
-a =4.5 ;
 func();
 b =8 ;
 return 0  ;
 }
- 
+
 
 
 		Symbol Table :
@@ -1421,6 +1082,6 @@ return 0  ;
 
 
 
-Total line 	: 19
-Total Errors 	: 7
+Total line 	: 15
+Total Errors 	: 6
 Total Warnings 	: 1

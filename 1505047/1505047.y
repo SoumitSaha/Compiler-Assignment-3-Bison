@@ -8,7 +8,6 @@
 #include <vector>
 #include "SymTab.h"
 
-//#define YYSTYPE SymbolInfo*
 
 using namespace std;
 
@@ -26,9 +25,7 @@ int argset = 0;
 int paraset = 0;
 
 
-void yyerror(const char *s)
-{
-	//write your code
+void yyerror(const char *s){
 }
 
 ofstream logFile, errorFile;
@@ -152,18 +149,12 @@ func_declaration : type_specifier ID LPAREN parameter_list RPAREN SEMICOLON 	{
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				if(paraset == 1){
 					str.append($4->Getsname());
-					//str.append(" ");
 				}
-				//cout << "here" << endl;
 				str.append($5->Getsname());
-				//str.append(" ");
 				str.append($6->Getsname());
 				str.append("\n");
 				printstr(str);
@@ -176,14 +167,10 @@ func_declaration : type_specifier ID LPAREN parameter_list RPAREN SEMICOLON 	{
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				if(paraset == 1){
 					str.append($4->Getsname());
-					//str.append(" ");
 				}
 				str.append($5->Getsname());
 				str.append("\n");
@@ -198,23 +185,16 @@ func_definition : type_specifier ID LPAREN parameter_list RPAREN {
 				func_def($1,$2);
 			} compound_statement{
 				
-				//cout << "Func ret :" << $2->funcrettype << endl;
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				if(paraset == 1){
 					str.append($4->Getsname());
-					//str.append(" ");
 				}
 				str.append($5->Getsname());
-				//str.append(" ");
 				str.append($7->Getsname());
-				str.append(" ");
 				printstr(str);
 				$$->Setsname(str);
 				logline();
@@ -231,17 +211,14 @@ parameter_list  : parameter_list COMMA type_specifier ID 	{
 				SymbolInfo* temp = makenewSymInfobyname($4->Getsname(), $4->Getstype());
 				temp->kindofID = "VAR";
 				parameters.push_back(*temp);
+				paraset = 1;
 				
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				str.append($4->Getsname());
-				//str.append(" ");
 				printstr(str);
 				$$->Setsname(str);
 				logline();
@@ -249,13 +226,12 @@ parameter_list  : parameter_list COMMA type_specifier ID 	{
 		| parameter_list COMMA type_specifier 	{
 				writelog("parameter_list  : parameter_list COMMA type_specifier");
 				argumentlist.push_back($3->kindofVariable);
+				paraset = 1;
 
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
 				printstr(str);
 				$$->Setsname(str);
@@ -268,11 +244,11 @@ parameter_list  : parameter_list COMMA type_specifier ID 	{
 				$2->kindofID = "VAR";
 				$2->kindofVariable = lastVarType;
 				parameters.push_back(*$2);
+				paraset = 1;
 
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
 				printstr(str);
 				$$->Setsname(str);
@@ -281,6 +257,7 @@ parameter_list  : parameter_list COMMA type_specifier ID 	{
 		| type_specifier	{
 				writelog("parameter_list  : type_specifier.");
 				argumentlist.push_back(lastVarType);
+				paraset = 1;
 
 				logline();
 				string str = "";
@@ -291,7 +268,6 @@ parameter_list  : parameter_list COMMA type_specifier ID 	{
 			}
 		| 	{	
 				writelog("parameter_list  : empty");
-				//$$->Setsname("");
 				paraset = 0;
 
 			}
@@ -302,7 +278,6 @@ compound_statement : LCURL	{
 				writelog("compound_statement : LCURL statements RCURL");
 				table.EnterScope(logFile);
 				for(int i = 0; i<parameters.size(); i++) {
-					//cout << "parameter insert :" << endl;
 					table.Insert(parameters[i].Getsname(), parameters[i].Getstype());
 					SymbolInfo* temp = table.LookUp(parameters[i].Getsname());
 					temp->kindofID = parameters[i].kindofID;
@@ -318,7 +293,6 @@ compound_statement : LCURL	{
 				str.append($1->Getsname());
 				str.append("\n");
 				str.append($3->Getsname());
-				//str.append("\n");
 				str.append($5->Getsname());
 				str.append("\n");
 				printstr(str);
@@ -345,9 +319,7 @@ var_declaration : type_specifier declaration_list SEMICOLON		{
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
 				str.append("\n");
 				printstr(str);
@@ -360,7 +332,6 @@ var_declaration : type_specifier declaration_list SEMICOLON		{
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
 				str.append("\n");
 				printstr(str);
@@ -420,11 +391,8 @@ declaration_list : declaration_list COMMA ID 	{
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				printstr(str);
 				$$->Setsname(str);
 				logline();
@@ -436,17 +404,11 @@ declaration_list : declaration_list COMMA ID 	{
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				str.append($4->Getsname());
-				//str.append(" ");
 				str.append($5->Getsname());
-				//str.append(" ");
 				str.append($6->Getsname());
-				//str.append(" ");
 				printstr(str);
 				$$->Setsname(str);
 				logline();
@@ -470,11 +432,8 @@ declaration_list : declaration_list COMMA ID 	{
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				str.append($4->Getsname());
 				str.append(" ");
 				printstr(str);
@@ -499,10 +458,8 @@ statements : statement 				{
 	   			logline();
 				string str = "";
 	   			str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
 				printstr(str);
-				//cout << $$->Getsname() << endl;
 				$$->Setsname(str);
 	   			logline();	
 	   		}
@@ -544,17 +501,13 @@ statement : var_declaration 	{
 	  			logline();
 				string str = "";
 	  			str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
 				str.append(" ");
 				str.append($4->Getsname());
 				str.append(" ");
 				str.append($5->Getsname());
-				//str.append(" ");
 				str.append($6->Getsname());
-				//str.append(" ");
 				str.append($7->Getsname());
 				printstr(str);
 				$$->Setsname(str);
@@ -566,13 +519,9 @@ statement : var_declaration 	{
 	  			logline();
 				string str = "";
 	  			str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				str.append($4->Getsname());
-				//str.append(" ");
 				str.append($5->Getsname());
 				printstr(str);
 				$$->Setsname(str);
@@ -584,17 +533,12 @@ statement : var_declaration 	{
 	  			logline();
 				string str = "";
 	  			str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				str.append($4->Getsname());
-				//str.append(" ");
 				str.append($5->Getsname());
 				str.append(" ");
 				str.append($6->Getsname());
-				//str.append(" ");
 				str.append($7->Getsname());
 				printstr(str);
 				$$->Setsname(str);
@@ -606,13 +550,9 @@ statement : var_declaration 	{
 	  			logline();
 				string str = "";
 	  			str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				str.append($4->Getsname());
-				//str.append(" ");
 				str.append($5->Getsname());
 				printstr(str);
 				$$->Setsname(str);
@@ -624,13 +564,9 @@ statement : var_declaration 	{
 	  			logline();
 				string str = "";
 	  			str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
-				//str.append(" ");
 				str.append($3->Getsname());
-				//str.append(" ");
 				str.append($4->Getsname());
-				//str.append(" ");
 				str.append($5->Getsname());
 				str.append("\n");
 	  			printstr(str);
@@ -701,11 +637,9 @@ expression_statement : SEMICOLON		{
 				logline();
 				string str = "";
 				str.append($1->Getsname());
-				//str.append(" ");
 				str.append($2->Getsname());
 				str.append("\n");
 				printstr(str);
-				////cout<< "Jhamela : " << str << endl;
 				$$->Setsname(str);
 				logline();
 			}
@@ -747,11 +681,8 @@ variable : ID 	{
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			str.append($3->Getsname());
-			//str.append(" ");
 			str.append($4->Getsname());
 			str.append(" ");
 			printstr(str);
@@ -763,8 +694,6 @@ variable : ID 	{
 expression : logic_expression	{
 			writelog("expression : logic_expression");
 			$$ = $1;
-			$$->intelements.push_back(0);
-			$$->floatelements.push_back(0);
 
 			logline();
 			string str = "";
@@ -783,9 +712,7 @@ expression : logic_expression	{
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			str.append($3->Getsname());
 			printstr(str);
 			$$->Setsname(str);
@@ -796,8 +723,6 @@ expression : logic_expression	{
 logic_expression : rel_expression 	{
 			writelog("logic_expression : rel_expression");
 			$$ = $1;
-			$$->intelements.push_back(0);
-			$$->floatelements.push_back(0);
 
 			logline();
 			string str = "";
@@ -816,9 +741,7 @@ logic_expression : rel_expression 	{
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			str.append($3->Getsname());
 			printstr(str);
 			$$->Setsname(str);
@@ -828,8 +751,6 @@ logic_expression : rel_expression 	{
 			
 rel_expression	: simple_expression 	{
 			writelog("rel_expression : simple_expression");
-			$1->intelements.push_back(0);
-			$1->floatelements.push_back(0);
 			$$ = $1;
 
 			logline();
@@ -849,9 +770,7 @@ rel_expression	: simple_expression 	{
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			str.append($3->Getsname());
 			printstr(str);
 			$$->Setsname(str);
@@ -861,8 +780,6 @@ rel_expression	: simple_expression 	{
 				
 simple_expression : term {
 			writelog("simple_expression : term");
-			$1->intelements.push_back(0);
-			$1->floatelements.push_back(0);
 			$$ = $1;
 
 			logline();
@@ -882,9 +799,7 @@ simple_expression : term {
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			str.append($3->Getsname());
 			printstr(str);
 			$$->Setsname(str);
@@ -894,8 +809,6 @@ simple_expression : term {
 					
 term :	unary_expression 	{
 			writelog("term : unary_expression");
-			$1->intelements.push_back(0);
-			$1->floatelements.push_back(0);
 			$$ = $1;
 
 			logline();
@@ -915,9 +828,7 @@ term :	unary_expression 	{
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			str.append($3->Getsname());
 			printstr(str);
 			$$->Setsname(str);
@@ -935,7 +846,6 @@ unary_expression : ADDOP unary_expression  {
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
 			printstr(str);
 			$$->Setsname(str);
@@ -951,16 +861,13 @@ unary_expression : ADDOP unary_expression  {
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
 			printstr(str);
 			$$->Setsname(str);
 			logline();
 		} 
 		| factor 	{
-			writelog("unary_expression : factor");			
-			$$->intelements.push_back(0);
-			$$->floatelements.push_back(0);
+			writelog("unary_expression : factor");
 			$$ = $1;
 
 			logline();
@@ -1001,8 +908,6 @@ factor	: variable 	{
 				} 
 				else{ 
 					SymbolInfo *temp2 = makenewSymInfo($1->funcrettype);
-					if(temp2->kindofVariable == "INT")temp2->intelements[0] = 0;
-					else if(temp2->kindofVariable == "FLOAT")temp2->floatelements[0] = 0;
 					$$ = temp2;
 				}
 			}
@@ -1010,15 +915,11 @@ factor	: variable 	{
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			if(argset == 1){
 				str.append($3->Getsname());
-				//str.append(" ");
 			}
 			str.append($4->Getsname());
-			//str.append(" ");
 			printstr(str);
 			$$->Setsname(str);
 			logline();
@@ -1030,11 +931,8 @@ factor	: variable 	{
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			str.append($3->Getsname());
-			//str.append(" ");
 			printstr(str);
 			$$->Setsname(str);
 			logline();
@@ -1043,8 +941,6 @@ factor	: variable 	{
 			writelog("factor : CONST_INT");
 			$1->kindofVariable = "INT";
 			$1->kindofID = "VAR";
-			$1->intelements.push_back(0);
-			$1->intelements[0]= atoi($1->Getsname().c_str());
 			$$ = $1;	
 
 			logline();
@@ -1059,8 +955,6 @@ factor	: variable 	{
 			writelog("factor : CONST_FLOAT");
 			$1->kindofVariable = "FLOAT";
 			$1->kindofID = "VAR";
-			$1->floatelements.push_back(0);
-			$1->floatelements[0]= atof($1->Getsname().c_str());
 			$$ = $1;
 
 			logline();
@@ -1079,9 +973,7 @@ factor	: variable 	{
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			printstr(str);
 			$$->Setsname(str);
 			logline();
@@ -1094,9 +986,7 @@ factor	: variable 	{
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			printstr(str);
 			$$->Setsname(str);
 			logline();
@@ -1116,7 +1006,6 @@ argument_list : arguments 	{
 			  |	{	
 			writelog("argument_list : empty");
 			argset = 0;
-			//$$->Setsname("");	
 		}
 			  ;
 	
@@ -1126,9 +1015,7 @@ arguments : arguments COMMA logic_expression	{
 			logline();
 			string str = "";
 			str.append($1->Getsname());
-			//str.append(" ");
 			str.append($2->Getsname());
-			//str.append(" ");
 			str.append($3->Getsname());
 			printstr(str);
 			$$->Setsname(str);
@@ -1159,8 +1046,6 @@ int main(int argc,char *argv[])
 
 	logFile.open("1505047_log.txt");
 	errorFile.open("1505047_err.txt");
-	////cout << semErrors << endl;
-	//yyin=fp;
 	yyparse();
 	errorFile << "Total Errors 	: " << semErrors << endl;
 	errorFile << "Total Warnings 	: " << warnings << endl;
@@ -1174,6 +1059,5 @@ int main(int argc,char *argv[])
 
 	logFile.close();
 	errorFile.close();
-	////cout << semErrors << endl;
 	return 0;
 }

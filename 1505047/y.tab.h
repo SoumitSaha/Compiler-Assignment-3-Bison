@@ -124,7 +124,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 44 "1505047.y" /* yacc.c:1909  */
+#line 41 "1505047.y" /* yacc.c:1909  */
  SymbolInfo* value; 
 
 #line 131 "y.tab.h" /* yacc.c:1909  */

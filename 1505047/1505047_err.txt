@@ -1,18 +1,16 @@
 Error at line 6 : Multiple declaration of c
 
-Error at line 8 : array index can't be float.
+Error at line 7 : array index can't be float.
 
-Warning at line 9 : Assigning float value to integer.
+Warning at line 8 : Assigning float value to integer. Type mismatch.
 
-Error at line 10 : Unsuported operand for mod operator
+Error at line 9 : Unsuported operand for mod operator
+
+Error at line 10 : a is not a Variable.
 
 Error at line 11 : a is not a Variable.
 
-Error at line 14 : a is not a Variable.
+Error at line 12 : Undeclared Variable : b
 
-Error at line 15 : a is not a Variable.
-
-Error at line 16 : Undeclared Variable : b
-
-Total Errors 	: 7
+Total Errors 	: 6
 Total Warnings 	: 1

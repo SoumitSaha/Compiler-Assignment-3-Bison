@@ -23,14 +23,10 @@ class SymbolInfo
         SymbolInfo *next;
         std::string returntype;
         std::string kindofID; 
-        std::string kindofVariable; 
-        int arrsize;
-        int arrindex;
+        std::string kindofVariable;
         std::string funcrettype;
         bool funcdefined;
-        std::vector <std::string> parameters;
-        std::vector<int> intelements; 
-        std::vector<float> floatelements; 
+        std::vector <std::string> parameters; 
 
         SymbolInfo(std::string nval, std::string tval);
         SymbolInfo(std::string tval);
@@ -92,6 +88,7 @@ class SymbolTable
         bool Insert(std::string symbolname, std::string symboltype);
         bool Remove(std::string symbolname);
         SymbolInfo *LookUp(std::string symbolname);
+        SymbolInfo *curLookUp(std::string symbolname);
         void PrintCurrent();
         void PrintAll();
         void PrintAllinFile(std::ofstream& logFile);

@@ -11,8 +11,6 @@ SymbolInfo::SymbolInfo(string nval, string tval)
 SymbolInfo::SymbolInfo(string tval)
 {
     kindofVariable = tval;
-    if(tval == "INT") intelements.push_back(0);
-    else if(tval == "FLOAT") floatelements.push_back(0);
     next = 0;
 }
 
@@ -278,6 +276,14 @@ SymbolInfo * SymbolTable::LookUp(string symbolname){
         if(found) break;
         temp = temp->parentScope;
     }
+    return found;
+}
+
+SymbolInfo * SymbolTable::curLookUp(string symbolname){
+    ScopeTable *temp;
+    temp = current;
+    SymbolInfo *found = 0;
+    found = temp->LookUp(symbolname);
     return found;
 }
 
